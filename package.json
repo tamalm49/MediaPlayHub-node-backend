@@ -1,0 +1,45 @@
+{
+  "name": "mediaplayhub-node-backend",
+  "version": "1.0.0",
+  "description": "This is a backend project for mediaplayhub project. Node js platform and typescript and javascript is used here.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "build": "tsc --build",
+    "start": "npm run build && node dist/server.js",
+    "dev": "nodemon --watch src -e ts --exec \"npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamalm49/MediaPlayHub-node-backend.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "express",
+    "mongodb"
+  ],
+  "author": "Tamal Mondal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tamalm49/MediaPlayHub-node-backend/issues"
+  },
+  "homepage": "https://github.com/tamalm49/MediaPlayHub-node-backend#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.4"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.0.2",
+    "typescript": "^5.3.3"
+  }
+}
