@@ -24,7 +24,6 @@ const userSchema = new Schema<UserType>(
         email: {
             type: String,
             required: true,
-            unique: true,
             lowercase: true,
             trim: true
         },
@@ -48,7 +47,8 @@ const userSchema = new Schema<UserType>(
         }],
         password: {
             type: String,
-            required: true
+            required: true,
+            select: false
         },
         refreshToken: {
             type: String
