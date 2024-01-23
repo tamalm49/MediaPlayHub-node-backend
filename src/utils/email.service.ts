@@ -23,6 +23,7 @@ export type mail = {
 export const sendEmail = async (mail: mail): Promise<any> => {
     try {
         let info = await mailTransporter.sendMail(mail);
+        console.log(info);
         return info.messageId;
     } catch (error) {
         throw error;

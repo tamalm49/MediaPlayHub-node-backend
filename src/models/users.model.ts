@@ -1,17 +1,10 @@
-import mongoose, { InferSchemaType, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
-
-export type UserType = {
-    userName: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    avatar: string,
-    watchHistory?: string[],
-    password: string,
-    refreshToken?: string
+import { UserDocument } from "../interface/user.interface.js";
+interface UserMethods{
+    isPasswordCorrect(password:string):Promise<boolean>
 }
-const userSchema = new Schema<UserType>(
+const userSchema = new Schema<UserDocument & UserMethods>(
     {
         userName: {
             type: String,
@@ -48,7 +41,7 @@ const userSchema = new Schema<UserType>(
         password: {
             type: String,
             required: true,
-            select: false
+            // select: false
         },
         refreshToken: {
             type: String
@@ -65,6 +58,7 @@ userSchema.pre("save", async function (next) {
     next()
 });
 userSchema.methods.isPasswordCorrect = async function (password: string): Promise<boolean> {
+    console.log(password,this.password);
     return await bcrypt.compare(password, this.password)
 }
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<UserDocument& UserMethods>("User", userSchema);

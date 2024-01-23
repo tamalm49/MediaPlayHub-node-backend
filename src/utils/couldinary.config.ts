@@ -8,28 +8,24 @@ cloudinary.config({
 });
 
 export const uploadToCloudinary = async function (locaFilePath: string) {
-    // locaFilePath :
-    // path of image which was just uploaded to "uploads" folder
+    try {
+        // locaFilePath :
+        // path of image which was just uploaded to "uploads" folder
 
-    var mainFolderName = "main"
-    // filePathOnCloudinary :
-    // path of image we want when it is uploded to cloudinary
-    var filePathOnCloudinary = mainFolderName + "/" + locaFilePath
+        var mainFolderName = "main"
+        // filePathOnCloudinary :
+        // path of image we want when it is uploded to cloudinary
 
-    return cloudinary.uploader.upload(locaFilePath, { "public_id": filePathOnCloudinary })
-        .then((result) => {
-            // Image has been successfully uploaded on cloudinary
-            // So we dont need local image file anymore
-            // Remove file from local uploads folder 
-            fs.unlinkSync(locaFilePath)
+        const result = await cloudinary.uploader.upload(locaFilePath, { resource_type: "auto" });
+        fs.unlinkSync(locaFilePath)
 
-            return {
-                message: "Success",
-                url: result.url
-            };
-        }).catch((error) => {
-            // Remove file from local uploads folder 
-            // fs.unlinkSync(locaFilePath)
-            return { message: "Fail", };
-        });
+        return {
+            message: "Success",
+            url: result.url
+        };
+    } catch (error) {
+        // Remove file from local uploads folder 
+        fs.unlinkSync(locaFilePath)
+        throw error;
+    }
 }
