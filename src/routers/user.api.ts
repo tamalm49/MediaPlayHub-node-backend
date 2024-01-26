@@ -2,11 +2,13 @@ import { Router } from "express";
 import { UserConntroller } from "../controllers/user.controller.js";
 import { upload } from "../middleware/uploader.multer.js";
 import { authenticate } from "../middleware/auth.handler.js";
-const router = Router();
+import VideoController from "../controllers/video.controller.js";
+const userrouter = Router();
 const uploader = upload.single("avatar");//.fields([{ name: 'avatar', maxCount: 1 }, { name: 'cover', maxCount: 1 }])
-router.get("/getuser",authenticate, UserConntroller.getUser);
-router.post("/registration", uploader, UserConntroller.saveUser);
-router.put("/update", UserConntroller.updateUser);
-router.post("/login",UserConntroller.login);
-router.delete("/logout",UserConntroller.logout);
-export default router;
+userrouter.get("/getuser",authenticate, UserConntroller.getUser);
+userrouter.post("/registration", uploader, UserConntroller.saveUser);
+userrouter.put("/update", UserConntroller.updateUser);
+userrouter.post("/login",UserConntroller.login);
+userrouter.delete("/logout",UserConntroller.logout);
+userrouter.post("/uploadvideo",authenticate ,upload.single("video"),VideoController.uploadVideo)
+export default userrouter;

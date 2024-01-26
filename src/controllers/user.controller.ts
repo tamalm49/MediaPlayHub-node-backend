@@ -1,15 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { UsersService } from "../services/users.service.js";
-class ApiRespose {
-    status: number;
-    data?: object;
-    message: string;
-    constructor(status: number,message: string,data? : object){
-        this.status = status;
-        this.message = message;
-        this.data = data;
-    }
-}
+import ApiRespose from "../utils/ApiRespose.js";
 
 export class UserConntroller {
     /**

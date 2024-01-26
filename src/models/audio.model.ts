@@ -1,7 +1,7 @@
 import mongoose, { InferSchemaType, Schema, Types } from "mongoose";
-const videoSchema = new Schema(
+const audioSchema = new Schema(
     {
-        videoFile: {
+        audioFile: {
             type: String,
             required: true,
         },
@@ -16,9 +16,8 @@ const videoSchema = new Schema(
             type: Number,
             required: true
         },
-        views: {
-            type: Number,
-            default: 0
+        Artist: {
+            type: String
         },
         isPublish: {
             type: Boolean,
@@ -26,7 +25,8 @@ const videoSchema = new Schema(
         },
         owner: {
             type: Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required : true
         },
         keyword : [{
             type : String
@@ -36,4 +36,4 @@ const videoSchema = new Schema(
         timestamps: true
     }
 );
-export const Video = mongoose.model("Video", videoSchema);
+export const Audio = mongoose.model("Audio", audioSchema);
