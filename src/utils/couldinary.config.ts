@@ -1,4 +1,4 @@
-import { UploadApiOptions, UploadApiResponse, v2 as cloudinary } from 'cloudinary';
+import { ResourceApiResponse, UploadApiOptions, UploadApiResponse, v2 as cloudinary } from 'cloudinary';
 import fs from "fs";
 // cloudinary configaration
 cloudinary.config({
@@ -18,7 +18,6 @@ export const uploadToCloudinary = async function (locaFilePath: string,folder?:s
         // path of image we want when it is uploded to cloudinary
 
         const result = await cloudinary.uploader.upload(locaFilePath, {folder,  resource_type: "auto" });
-        console.log(result);
         fs.unlinkSync(locaFilePath)
 
         return result;
@@ -63,4 +62,18 @@ const cloudinaryUploadOptions : UploadApiOptions = {
         fs.unlinkSync(locaFilePath)
         throw error;
     }
+}
+
+export const downStreamFromCloudinary = (id : string) : Promise<ResourceApiResponse>=>{
+    try {
+        return new Promise((resolve,reject)=>{
+            cloudinary.api.resources_by_asset_ids(id,(err: any,result :ResourceApiResponse )=>{
+            if (err) reject (err);
+            resolve(result);
+            })
+        })
+    } catch (error) {
+     throw error;   
+    }
+
 }
