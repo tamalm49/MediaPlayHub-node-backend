@@ -1,17 +1,18 @@
 import dotenv from 'dotenv';
-import connectDB from "./db.config.js";
+import connectDB from './db.config.js';
 import app from './app.js';
+import logger from './utils/logger.js';
 dotenv.config();
 let enviroment = process.env.NODE_ENV;
 const port = process.env.PORT;
-connectDB().then(() => {
+connectDB()
+  .then(() => {
     app.listen(port, () => {
-        console.log(`${enviroment} server is running on ${port}`);
-    })
-}).catch((err) => {
-    console.error("Mongo db error" + err);
-    process.on("exit", () => {
-        console.log("server stoped");
-    }
-    )
-});
+      logger.info(`${enviroment} server is running on ${port}`);
+    });
+  })
+  .catch((err) => {
+    process.on('exit', () => {
+      logger.error('Mongo db error' + err);
+    });
+  });
