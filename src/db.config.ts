@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Redis } from 'ioredis';
 import logger from './utils/logger.js';
 const connectDB = async () => {
   try {
@@ -8,4 +9,7 @@ const connectDB = async () => {
     throw error;
   }
 };
+
+export const RedisClient = new Redis();
+
 export default connectDB;

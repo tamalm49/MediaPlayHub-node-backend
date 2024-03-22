@@ -10,6 +10,7 @@ export class UsersService {
    */
   public static async save(body: UserType, files?: any): Promise<string> {
     try {
+      if (!files) throw new CustomError('File Missing', 400);
       let cloudResult = await uploadToCloudinary(files.path);
       let user = {
         firstName: body.firstName,

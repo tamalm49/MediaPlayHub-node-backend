@@ -40,7 +40,6 @@ export class UserConntroller {
     try {
       let { username, password } = req.body;
       let login = await UsersService.userlogin(username, password);
-      console.log(login);
       res
         .status(200)
         .cookie('ACCESSTOKEN', login.accessToken, {

@@ -7,8 +7,6 @@ class VideoService {
   public static async upload(files: any) {
     try {
       let cloudResult = await uploadStreamToCloudinary(files.path, files.originalname);
-
-      console.log(cloudResult);
       return cloudResult;
     } catch (error) {
       throw error;

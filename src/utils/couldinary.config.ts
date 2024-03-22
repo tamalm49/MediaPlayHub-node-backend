@@ -56,7 +56,6 @@ export const uploadStreamToCloudinary = async function (
           reject(err);
         } else {
           fs.unlinkSync(locaFilePath);
-          console.log(result);
           resolve(result);
         }
       });

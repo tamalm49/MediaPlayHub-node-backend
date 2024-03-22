@@ -22,7 +22,6 @@ const fileFilter = function (req: Request, file: Express.Multer.File, cb: any) {
   // To reject this file pass `false`, like so:
   let extension: string | string[] = file.originalname.split('.');
   extension = extension[extension.length - 1];
-  console.log(file);
   if (whiteListedAudioType.includes(file.mimetype) && whiteListedAudioextension.includes(extension) && file.fieldname === 'audio') {
     cb(null, true);
   } else if (whiteListedVideoType.includes(file.mimetype) && whiteListedVideoextension.includes(extension) && file.fieldname === 'video') {
