@@ -10,6 +10,9 @@ const connectDB = async () => {
   }
 };
 
-export const RedisClient = new Redis();
+export const RedisClient = new Redis({
+  host: process.env.REDISHOST || 'localhost',
+  port: 6379
+});
 
 export default connectDB;

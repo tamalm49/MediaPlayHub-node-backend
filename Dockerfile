@@ -20,7 +20,7 @@
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 
     RUN apt-get update
-    run apt-get install -y nodejs
+    RUN apt-get install -y nodejs
     RUN apt-get clean
 
 
@@ -43,4 +43,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Define the command to run your app using CMD which defines your runtime
-CMD ["npm","run", "serve"]
+CMD ["npm","run", "service"]

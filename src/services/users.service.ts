@@ -4,12 +4,14 @@ import { CustomError } from '../utils/error.handler.js';
 import { uploadToCloudinary } from '../utils/couldinary.config.js';
 import { AccessPayload, UserType } from '../interface/user.interface.js';
 import jwt from 'jsonwebtoken';
+import logger from '../utils/logger.js';
 export class UsersService {
   /**
    * save
    */
   public static async save(body: UserType, files?: any): Promise<string> {
     try {
+      logger.info(files);
       if (!files) throw new CustomError('File Missing', 400);
       let cloudResult = await uploadToCloudinary(files.path);
       let user = {

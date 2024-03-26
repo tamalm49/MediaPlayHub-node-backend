@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
     cb(null, './public/temp');
   },
   filename: function (req, file, cb) {
-    //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    console.log(file.originalname);
     cb(null, file.originalname);
   }
 });
@@ -13,8 +13,8 @@ const whiteListedVideoType: string | string[] = ['video/x-matroska', 'video/mp4'
 const whiteListedVideoextension: string | string[] = ['mkv', 'mp4'];
 const whiteListedAudioType: string | string[] = ['audio/mpeg', 'audio/mp3'];
 const whiteListedAudioextension: string | string[] = ['mp3'];
-const whiteListedimgextension: string | string[] = ['image/png'];
-const whiteListedimgType: string | string[] = ['png'];
+const whiteListedimgextension: string | string[] = ['image/png', 'image/jpg', 'image/jpeg'];
+const whiteListedimgType: string | string[] = ['png', 'jpg', 'jpeg'];
 const fileFilter = function (req: Request, file: Express.Multer.File, cb: any) {
   // The function should call `cb` with a boolean
   // to indicate if the file should be accepted
@@ -27,6 +27,8 @@ const fileFilter = function (req: Request, file: Express.Multer.File, cb: any) {
   } else if (whiteListedVideoType.includes(file.mimetype) && whiteListedVideoextension.includes(extension) && file.fieldname === 'video') {
     cb(null, true);
   } else if (whiteListedimgType.includes(file.mimetype) && whiteListedimgextension.includes(extension) && file.fieldname === 'thumbnail') {
+    cb(null, true);
+  } else if (whiteListedimgType.includes(file.mimetype) && whiteListedimgextension.includes(extension) && file.fieldname === 'avatar') {
     cb(null, true);
   } else {
     cb(new MulterError('LIMIT_UNEXPECTED_FILE'));

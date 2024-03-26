@@ -1,0 +1,20 @@
+version: '3'
+services:
+  myredis:
+    image: redis
+    healthcheck:
+      test: ["CMD","redis-cli", "PING"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    container_name: redis
+    ports:
+      - "6379:6379" 
+  mynode:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+      - .env.development.local

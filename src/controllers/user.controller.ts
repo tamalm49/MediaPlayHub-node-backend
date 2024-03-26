@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { UsersService } from '../services/users.service.js';
 import ApiRespose from '../utils/ApiRespose.js';
+import logger from '../utils/logger.js';
 
 export class UserConntroller {
   /**
@@ -19,6 +20,7 @@ export class UserConntroller {
    */
   public static async saveUser(req: Request, res: Response, next: NextFunction) {
     try {
+      logger.info('Hi');
       let saveduser = await UsersService.save(req.body, req.file);
       res.status(200).json(new ApiRespose(200, 'Successfully saved', { id: saveduser }));
     } catch (error) {
